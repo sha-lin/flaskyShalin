@@ -24,6 +24,15 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/submit', methods=['GET','POST'])
+def submit():
+    if request.method == 'POST':
+        fname= request.form['fname']
+        lname= request.form['lname']
+        pet= request.form['pets']
 
+        student=Student(fname,lname,pet)
+        db.session.add(student)
+        db.session.commit()
 if __name__ == '__main__':
     app.run(debug=True)
